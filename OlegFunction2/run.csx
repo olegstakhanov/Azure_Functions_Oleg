@@ -35,6 +35,6 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
         
 			? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
         
-			: req.CreateResponse(HttpStatusCode.OK, name + " thinks that Azure functions are so cool");
+			: req.CreateResponse(HttpStatusCode.OK, name + " thinks that Azure functions are so cool!!!");
 
 }
