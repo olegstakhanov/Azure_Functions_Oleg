@@ -6,7 +6,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
 {
     
 		
-		log.Info($"C## HTTP trigger function processed a request. RequestUri={req.RequestUri}");
+		log.Info($"C# HTTP trigger function processed a request. RequestUri={req.RequestUri}");
 
     
 		
@@ -35,6 +35,6 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
         
 			? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
         
-			: req.CreateResponse(HttpStatusCode.OK, "Hello from JH! " + name);
+			: req.CreateResponse(HttpStatusCode.OK, "Hello from John Hancock! " + name);
 
 }
