@@ -1,18 +1,21 @@
 using System.Net;
-using System.Threading.Tasks;
 
 public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceWriter log)
 {
-    var helloRequest = await req.Content.ReadAsAsync<HelloRequest>();
-    
-    var personToGreet = helloRequest?.Name ?? "world";    
-    var responseMessage = $"Hello {personToGreet}!";
+    log.Info($"C# HTTP trigger function processed a request. RequestUri={req.RequestUri}");
 
-    return req.CreateResponse(HttpStatusCode.OK, responseMessage);
+    // parse query parameter
+    string name = req.GetQueryNameValuePairs()
+        .FirstOrDefault(q => string.Compare(q.Key, "name", true) == 0)
+        .Value;
+
+    // Get request body
+    dynamic data = await req.Content.ReadAsAsync<object>();
+
+    // Set name to query string or body data
+    name = name ?? data?.name;
+
+    return name == null
+        ? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
+        : req.CreateResponse(HttpStatusCode.OK, "Hello from JH! " + name);
 }
-
-public class HelloRequest
-{
-    public string Name { get; set; }
-} 
-
