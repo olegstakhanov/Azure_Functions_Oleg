@@ -14,4 +14,5 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
 public class HelloRequest
 {
     public string Name { get; set; }
-}
+} 
+
